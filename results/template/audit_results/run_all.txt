@@ -1,0 +1,5 @@
+SQL> select to_char(sysdate,'YYYY-MM-DD hh24:mi:ss') from dual;
+"TO_CHAR(SYSDATE,'YYYY-MM-DDHH24:MI:SS')"
+"2023-11-09 03:04:20"
+
+SQL> spool off
