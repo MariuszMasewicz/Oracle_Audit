@@ -6,7 +6,7 @@ Start-Process -FilePath "PATH_TO_SQLCL\sql.exe" -ArgumentList "user/password@dat
 
 cd PATH_TO_RESULTS
 git add .
-$commit_message="Automatic audit of all databases: "+(Get-Date -format "yyyy-MM-dd")
+$commit_message="Automatic audit of all databases: "+(Get-Date -format "yyyy-MM-dd HH:mm:ss")
 $commit_message
 git commit -m $commit_message
 git push
