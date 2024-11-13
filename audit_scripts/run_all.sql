@@ -5,7 +5,7 @@ alter session set NLS_TIMESTAMP_FORMAT = 'YYYY-MM-DD hh24:mi:SSXFF';
 alter session set NLS_TIMESTAMP_TZ_FORMAT = 'YYYY-MM-DD hh24:mi:SSXFF TZR';
 alter session set NLS_NUMERIC_CHARACTERS = '.,';
 
-set echo on
+set echo off
 set timing off
 SET SQLFORMAT CSV
 spool audit_results/run_all.txt

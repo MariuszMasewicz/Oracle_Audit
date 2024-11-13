@@ -29,7 +29,7 @@ select * from gv$ASM_alias order by name;
 spool off
 
 spool audit_results/asm_disk_group_mapping.csv
-select g.group_number, g.name group_name, d.name disk_name, path from v$ASM_diskgroup g join v$ASM_disk d on g.group_number=d.group_number order by 1,2;
+select g.group_number, g.name group_name, d.name disk_name, path from v$ASM_diskgroup g join v$ASM_disk d on g.group_number=d.group_number order by 1,2,3;
 spool off
 
 spool audit_results/asm_group_connections.csv
