@@ -51,3 +51,22 @@ where
    df.tablespace_name = fs.tablespace_name
 order by Tablespace_name;
 spool off
+
+spool audit_results/storage_size.csv
+SELECT typ, Tablespace_LogGroup, SUM(gb) GB, sum(files) as files FROM
+(
+SELECT 'Datafiles' typ, tablespace_name Tablespace_LogGroup,  ROUND(  bytes/1024/1024/1024, 2 ) GB, 1 as files
+  FROM dba_data_files
+UNION ALL
+SELECT 'Tempfiles' typ, tablespace_name Tablespace_LogGroup, ROUND( bytes/1024/1024/1024, 2 ) GB, 1 as files
+  FROM dba_temp_files
+UNION  ALL
+SELECT 'Logfiles' typ, to_char(group#) Tablespace_LogGroup, ROUND( bytes*members/1024/1024/1024, 2 ) GB, members as files
+  FROM v$log
+UNION ALL
+SELECT 'Controlfiles' typ, 'Controlfile' Tablespace_LogGroup, ROUND( BLOCK_SIZE*FILE_SIZE_BLKS/1024/1024/1024, 2 ) GB, 1 as files
+  FROM v$controlfile
+)
+GROUP BY ROLLUP(typ, Tablespace_LogGroup)
+order by typ, Tablespace_LogGroup, GB desc;
+spool off

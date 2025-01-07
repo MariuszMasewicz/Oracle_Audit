@@ -35,3 +35,9 @@ spool off
 spool audit_results/asm_group_connections.csv
 select a.instance_name, b.name diskgroup_name,a.db_name,a.status from v$asm_client a, v$asm_diskgroup b where a.group_number=b.group_number;
 spool off
+
+spool audit_results/asm_file_aliases.csv
+select * 
+from gv$asm_alias a join gv$asm_file f on a.file_number=f.file_number and a.inst_id=f.inst_id and a.group_number=f.group_number
+order by a.group_number, a.file_number, a.name, a.inst_id;
+spool off
