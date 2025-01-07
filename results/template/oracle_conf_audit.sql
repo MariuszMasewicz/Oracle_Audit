@@ -15,5 +15,6 @@ end;
 --select * from v$instance;
 
 @../../skrypty/run_all.sql
+@custom.sql
 
 exit
