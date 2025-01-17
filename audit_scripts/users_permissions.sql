@@ -29,7 +29,7 @@ select * from role_role_privs order by role, granted_role;
 spool off
 
 spool audit_results/role_tab_privs.csv
-select * from role_tab_privs order by role, owner, table_name, privilege;
+select * from role_tab_privs order by role, owner, table_name, column_name, privilege;
 spool off
 
 spool audit_results/role_sys_privs.csv
@@ -46,7 +46,7 @@ from
       null     grantee, 
       username granted_role
     from 
-      dba_users where upper(username) like ('PL%')
+      dba_users where upper(username) like ('PL%')   or  upper(username) like ('STAT%')
   /* THE ROLES TO ROLES RELATIONS */ 
   union
     select 
@@ -66,6 +66,24 @@ start with grantee is null
 connect by grantee = prior granted_role;
 spool off
 
+spool audit_results/users_and_roles.csv
+select grantee as username, listagg(granted_role , ';') WITHIN GROUP (ORDER BY granted_role) as granted_roles
+from dba_role_privs 
+where grantee in (select username 
+                  from dba_users 
+                  where (upper(username) like ('PL%')   or  upper(username) like ('STAT%'))
+                  )
+group by grantee
+order by grantee;
+spool off
 
+/*
+spool audit_results/roles_and_granted_roles.csv
+select role as role, listagg(granted_role , ';') WITHIN GROUP (ORDER BY granted_role) as granted_roles
+from role_role_privs 
+group by role
+order by role;
+spool off
+*/
 
 --select * from dba_credentials;
