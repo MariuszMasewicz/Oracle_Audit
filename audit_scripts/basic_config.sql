@@ -4,7 +4,7 @@ select * from gv$database;
 spool off
 
 spool audit_results/cdb_services.csv
-select * from cdb_services order by service_id;
+select * from cdb_services order by con_id, service_id;
 spool off
 
 spool audit_results/diag_info.csv
@@ -81,7 +81,7 @@ select * from sys.registry$history order by action_time;
 spool off
 
 spool audit_results/cdb_registry_sqlpatch.csv
-select * from cdb_registry_sqlpatch order by install_id;
+select * from cdb_registry_sqlpatch order by con_id, install_id;
 spool off
 
 spool audit_results/v_system_fix_control.csv
@@ -89,5 +89,5 @@ SELECT * FROM   gv$system_fix_control order by inst_id, bugno;
 spool off
 
 spool audit_results/cdb_feature_usage_statistics.csv
-select * from cdb_feature_usage_statistics order by last_usage_date desc nulls last,dbid, name;
+select * from cdb_feature_usage_statistics order by con_id, last_usage_date desc nulls last,dbid, name;
 spool off

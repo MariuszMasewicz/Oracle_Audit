@@ -1,6 +1,6 @@
 SET SQLFORMAT CSV
 spool audit_results/cdb_data_files.csv
-select * from cdb_data_files order by file_id desc;
+select * from cdb_data_files order by con_id, file_id desc;
 spool off
 
 spool audit_results/v_datafile.csv
@@ -8,7 +8,7 @@ select * from gv$datafile order by file# desc;
 spool off
 
 spool audit_results/cdb_temp_files.csv
-select * from cdb_temp_files order by file_id desc;
+select * from cdb_temp_files order by con_id, file_id desc;
 spool off
 
 spool audit_results/v_controlfile.csv
@@ -16,7 +16,7 @@ select * from gV$CONTROLFILE order by name;
 spool off
 
 spool audit_results/cdb_tablespaces.csv
-select * from cdb_tablespaces order by tablespace_name;
+select * from cdb_tablespaces order by con_id, tablespace_name;
 spool off
 
 spool audit_results/v_tablespace.csv

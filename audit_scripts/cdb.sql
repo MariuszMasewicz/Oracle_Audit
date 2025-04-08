@@ -35,7 +35,7 @@ from CDB_CONTAINER_DATA
 order by username, object_name, con_id;
 spool off
 
-spool audit_results/cdb_container_data.csv
+spool audit_results/cdb_pdb_saved_states.csv
 select * 
 from CDB_PDB_SAVED_STATES;
 spool off
