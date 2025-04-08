@@ -41,7 +41,6 @@ FROM (
 	  SUM (bytes) / (1024 * 1024 * 1024) as actual_G_bytes,
 	  count (*) as number_of_files
     FROM cdb_data_files
-    where (con_id=:CON_ID or :CON_ID is null)
     GROUP BY
       con_id, tablespace_name
 	union all
@@ -51,7 +50,6 @@ FROM (
 	  SUM (bytes) / (1024 * 1024 * 1024) as actual_G_bytes,
 	  count (*) as number_of_files
     FROM cdb_temp_files
-    where (con_id=:CON_ID or :CON_ID is null)
     GROUP BY
       con_id,tablespace_name	
   ) a
@@ -60,7 +58,6 @@ left outer join (
 	  con_id, TABLESPACE_NAME, 
 	  sum(bytes) / (1024 * 1024 * 1024) as used_G_bytes
     from cdb_segments
-    where (con_id=:CON_ID or :CON_ID is null)
     group by 
 	  con_id, TABLESPACE_NAME
     UNION ALL
@@ -68,12 +65,11 @@ left outer join (
       con_id, tablespace_name,
       (tablespace_size - free_space) / (1024 * 1024 * 1024) used_G_bytes
     FROM cdb_temp_free_space
-    where (con_id=:CON_ID or :CON_ID is null)
 	--where tablespace_name = 'USERS'
     --GROUP BY
     --  tablespace_name	
   ) b ON a.tablespace_name = b.tablespace_name and a.con_id=b.con_id
-  order by a.con_id, a.tablespace_name
+  order by a.con_id, a.tablespace_name;
 spool off
 
 spool audit_results/storage_size.csv
@@ -92,5 +88,5 @@ SELECT 'Controlfiles' typ, null, 'Controlfile' Tablespace_LogGroup, ROUND( BLOCK
   FROM v$controlfile
 )
 GROUP BY ROLLUP(typ, con_id, Tablespace_LogGroup)
-order by typ, con_id, Tablespace_LogGroup, GB desc
+order by typ, con_id, Tablespace_LogGroup, GB desc;
 spool off
