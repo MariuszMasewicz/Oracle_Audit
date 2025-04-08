@@ -12,7 +12,7 @@ end if;
 end;
 /
 
---select * from v$instance;
+--select instance_name, host_name from v$instance;
 
 @../../skrypty/run_all.sql
 @custom.sql

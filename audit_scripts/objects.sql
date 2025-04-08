@@ -1,8 +1,8 @@
---select * from dba_tables order by owner, table_name, tablespace_name;
-select owner, table_name, tablespace_name from dba_tables order by owner, table_name, tablespace_name;
+--select * from cdb_tables order by owner, table_name, tablespace_name;
+select owner, table_name, tablespace_name from cdb_tables order by owner, table_name, tablespace_name;
 
-desc dba_indexes
-select * from dba_indexes;
+desc cdb_indexes
+select * from cdb_indexes;
 select owner,
     index_name,
     index_type,
@@ -59,6 +59,6 @@ select owner,
     indexing,
     auto,
     constraint_index
-    from dba_indexes;
+    from cdb_indexes;
 
-select listagg(column_name, ',') within group( order by column_position) from dba_ind_columns where INDEX_OWNER = 'SYS' and 	INDEX_NAME='XS$OBJ_UK' and	TABLE_OWNER = 'SYS' and 	TABLE_NAME = 'XS$OBJ';
+select listagg(column_name, ',') within group( order by column_position) from cdb_ind_columns where INDEX_OWNER = 'SYS' and 	INDEX_NAME='XS$OBJ_UK' and	TABLE_OWNER = 'SYS' and 	TABLE_NAME = 'XS$OBJ';
