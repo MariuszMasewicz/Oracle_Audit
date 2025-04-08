@@ -17,7 +17,10 @@ select * from cdb_sys_privs order by con_id, grantee, privilege;
 spool off
 
 spool audit_results/cdb_tab_privs.csv
-select * from cdb_tab_privs order by con_id, grantee, owner, table_name, privilege;
+select * 
+from cdb_tab_privs 
+where type not in ( 'JAVA CLASS', 'JAVA RESOURCE')
+order by con_id, grantee, owner, table_name, privilege;
 spool off
 
 spool audit_results/cdb_role_privs.csv
