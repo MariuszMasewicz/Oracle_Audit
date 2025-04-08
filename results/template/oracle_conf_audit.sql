@@ -1,4 +1,4 @@
-WHENEVER SQLERROR EXIT SQL.SQLCODE -20001
+WHENEVER SQLERROR EXIT SQL.SQLCODE
 
 declare 
 v_instance_name v$instance.instance_name%type;

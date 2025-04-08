@@ -4,11 +4,13 @@ $ResultsPath="PATH_TO_RESULTS\results"
 $AuditScript="oracle_conf_audit.sql"
 $AdditionalOptions="-Wait #-NoNewWindow"
 
-cd $ResultsPath\database1
-Start-Process -FilePath $SQLPath -ArgumentList "user1/password1@database1_host:1521/SID1 @$AuditScript" $AdditionalOptions
+cd $ResultsPath\database1_host1
+$pwd.Path
+Start-Process -FilePath $SQLPath -ArgumentList "user1/password1@database1_host:1521/SID1 @$AuditScript" $AdditionalOptions"
 
-cd $ResultsPath\database2
-Start-Process -FilePath $SQLPath -ArgumentList "user2/password2@database2_host:1521/SID1 @$AuditScript" $AdditionalOptions
+cd $ResultsPath\database2_host2
+$pwd.Path
+Start-Process -FilePath $SQLPath -ArgumentList "user2/password2@database2_host:1521/SID2 @$AuditScript# $AdditionalOptions"
 
 cd $ResultsPath
 git add .
