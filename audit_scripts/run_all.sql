@@ -13,6 +13,7 @@ select to_char(sysdate,'YYYY-MM-DD hh24:mi:ss') from dual;
 spool off
 
 @basic_config.sql
+@cdb.sql
 @storage.sql
 @scheduler.sql
 @asm.sql
