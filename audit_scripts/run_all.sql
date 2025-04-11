@@ -7,6 +7,8 @@ alter session set NLS_NUMERIC_CHARACTERS = '.,';
 
 set echo off
 set timing off
+set feedback off
+set termout off
 SET SQLFORMAT CSV
 spool audit_results/run_all.txt
 select to_char(sysdate,'YYYY-MM-DD hh24:mi:ss') from dual;

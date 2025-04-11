@@ -1,11 +1,26 @@
 $CurrentDir=$pwd.Path
+
+#local instalation of Oracle client or part of SQLDeveloper instalation
+#for example
+#$SQLPath="c:\Program Files\sqldeveloper\sqldeveloper\bin\sql.exe"
 $SQLPath="PATH_TO_SQLCL\sql.exe"
+
+#local git repository or cloned copy of remote git repository
+#for example
+#git clone https://your remote repository/Databases_config
 $ResultsPath="PATH_TO_RESULTS\results"
+
+#name of main script running all audit queries
 $AuditScript="oracle_conf_audit.sql"
+
+#location where Oracle_Adit is cloned
+#git clone https://github.com/MariuszMasewicz/Oracle_Audit
 $OracleAuditScripts="path_to_local_Oracle_Audit_repository"
 
 
 Get-Date -format "yyyy-MM-dd HH:mm:ss"
+
+#refreshing Oracle_Audit
 cd $OracleAuditScripts
 git pull
 
