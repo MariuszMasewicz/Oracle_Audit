@@ -4,11 +4,16 @@ select * from gv$database;
 spool off
 
 spool audit_results/cdb_services.csv
-select * from cdb_services order by con_id, service_id;
+select * 
+from cdb_services 
+order by con_id, service_id;
 spool off
 
 spool audit_results/diag_info.csv
-SELECT * FROM  gv$diag_info order by inst_id, name;
+SELECT * 
+FROM gv$diag_info 
+where name <> 'Default Trace File'
+order by inst_id, name, con_id;
 spool off
 
 spool audit_results/server_info.csv

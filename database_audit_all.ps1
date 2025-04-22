@@ -3,7 +3,9 @@ $CurrentDir=$pwd.Path
 #local instalation of Oracle client or part of SQLDeveloper instalation
 #for example
 #$SQLPath="c:\Program Files\sqldeveloper\sqldeveloper\bin\sql.exe"
-$SQLPath="PATH_TO_SQLCL\sql.exe"
+#or sqlcl downloaded from oracle.com
+#https://www.oracle.com/pl/database/sqldeveloper/technologies/sqlcl/download/
+$SQLPath="c:\Program Files\sqlcl\bin\sql.exe"
 
 #local git repository or cloned copy of remote git repository
 #for example
@@ -26,7 +28,7 @@ git pull
 
 cd $ResultsPath\database1_host1
 $pwd.Path
-Start-Process -FilePath $SQLPath -ArgumentList "user1/password1@database1_host:1521/SID1 @$AuditScript" -Wait #-NoNewWindow
+Start-Process -FilePath $SQLPath -ArgumentList "-name ""sqlcl saved connection name"" @$AuditScript" -Wait #-NoNewWindow
 
 cd $ResultsPath\database2_host2
 $pwd.Path
