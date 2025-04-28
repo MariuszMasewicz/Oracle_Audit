@@ -14,6 +14,9 @@ spool audit_results/run_all.txt
 select to_char(sysdate,'YYYY-MM-DD hh24:mi:ss') from dual;
 spool off
 
+--VARIABLE v_version VARCHAR2(7);
+--select version into v_version from v$instance;
+
 @basic_config.sql
 @cdb.sql
 @storage.sql

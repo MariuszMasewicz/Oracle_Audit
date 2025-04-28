@@ -37,7 +37,7 @@ select * from gv$spparameter order by isspecified, name;
 spool off
 
 spool audit_results/v_system_parameter.csv
-select * from gv$system_parameter order by isdefault, name;
+select * from gv$system_parameter order by isdefault, name, con_id;
 spool off
 
 spool audit_results/parameter_diffs.csv
@@ -85,8 +85,27 @@ spool audit_results/registry_history.csv
 select * from sys.registry$history order by action_time;
 spool off
 
+spool audit_results/cdb_registry.csv
+select * from cdb_registry order by con_id, comp_id, comp_name;
+spool off
+
+spool audit_results/cdb_registry_database.csv
+select * from cdb_registry_database order by con_id, platform_id;
+spool off
+
+spool audit_results/cdb_registry_dependencies.csv
+select * from cdb_registry_dependencies order by con_id, comp_id, namespace, req_comp_id;
+
+spool audit_results/cdb_registry_hierarchy.csv
+select * from cdb_registry_hierarchy order by con_id, comp_id, namespace, version;
+spool off
+
+spool audit_results/cdb_registry_log.csv
+select * from cdb_registry_log order by optime desc;
+spool off
+
 spool audit_results/cdb_registry_sqlpatch.csv
-select * from cdb_registry_sqlpatch order by con_id, install_id;
+select * from cdb_registry_sqlpatch order by con_id, patch_id;
 spool off
 
 spool audit_results/v_system_fix_control.csv

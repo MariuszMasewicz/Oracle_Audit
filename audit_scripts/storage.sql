@@ -23,6 +23,12 @@ spool audit_results/v_tablespace.csv
 select * from gv$tablespace order by name;
 spool off
 
+spool audit_results/top_segments_by_bytes.csv
+select * 
+from (select * from cdb_segments order by bytes desc)
+where rownum <=100;
+spool off
+
 spool audit_results/tablespaces_free_space.csv
 SELECT
 --  to_char(sysdate, 'YYYY-MM-DD_HH24:MI:SS') as metric_time,
@@ -90,3 +96,35 @@ SELECT 'Controlfiles' typ, null, 'Controlfile' Tablespace_LogGroup, ROUND( BLOCK
 GROUP BY ROLLUP(typ, con_id, Tablespace_LogGroup)
 order by typ, con_id, Tablespace_LogGroup, GB desc;
 spool off
+
+spool audit_results/storage_FreeUsedSpace.csv
+select tbsp.con_id, tbsp.tablespace_name, block_size, 
+ files_bytes, files_count, files_min, files_max,
+  'SQLDEV:GAUGE:0:100:0:0:'||nvl(round((free_bytes/files_bytes)*100),0)  as free_to_file_size,
+  round((free_bytes/files_bytes)*100) as free_to_file_size_pct,
+ 'SQLDEV:GAUGE:0:100:0:0:'||nvl(round((used_bytes/files_bytes)*100),0)  as used_to_file_size,
+ round((used_bytes/files_bytes)*100) as used_to_file_size_pct,
+ free_bytes, free_count, free_min, free_max,
+ used_bytes, used_count, used_min, used_max,
+ files_bytes - (free_bytes+used_bytes)
+ from 
+ cdb_tablespaces tbsp 
+ left join
+ (( select con_id, tablespace_name, sum(bytes) files_bytes, count(*) files_count, min(bytes) files_min, max(bytes) files_max 
+ from cdb_data_files
+ group by con_id, tablespace_name) 
+ union all
+ ( select con_id, tablespace_name, sum(bytes) files_bytes, count(*) files_count, min(bytes) files_min, max(bytes) files_max 
+ from cdb_temp_files
+ group by con_id, tablespace_name)) files on (files.con_id=tbsp.con_id and files.tablespace_name=tbsp.tablespace_name) 
+  left join
+ (select con_id, tablespace_name, sum(bytes) free_bytes, count(*) free_count, min(bytes) free_min, max(bytes) free_max 
+ from cdb_free_space
+ group by con_id, tablespace_name) free on (free.con_id=tbsp.con_id and free.tablespace_name=tbsp.tablespace_name) 
+ left join 
+(select con_id, tablespace_name, sum(bytes) used_bytes, count(*) used_count, min(bytes) used_min, max(bytes) used_max 
+ from cdb_extents
+ group by con_id, tablespace_name) used on (free.con_id=used.con_id and free.tablespace_name=used.tablespace_name)
+ order by 1,2;
+ spool off
+
