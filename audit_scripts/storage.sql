@@ -100,9 +100,9 @@ spool off
 spool audit_results/storage_FreeUsedSpace.csv
 select tbsp.con_id, tbsp.tablespace_name, block_size, 
  files_bytes, files_count, files_min, files_max,
-  'SQLDEV:GAUGE:0:100:0:0:'||nvl(round((free_bytes/files_bytes)*100),0)  as free_to_file_size,
+ --'SQLDEV:GAUGE:0:100:0:0:'||nvl(round((free_bytes/files_bytes)*100),0)  as free_to_file_size,
   round((free_bytes/files_bytes)*100) as free_to_file_size_pct,
- 'SQLDEV:GAUGE:0:100:0:0:'||nvl(round((used_bytes/files_bytes)*100),0)  as used_to_file_size,
+ --'SQLDEV:GAUGE:0:100:0:0:'||nvl(round((used_bytes/files_bytes)*100),0)  as used_to_file_size,
  round((used_bytes/files_bytes)*100) as used_to_file_size_pct,
  free_bytes, free_count, free_min, free_max,
  used_bytes, used_count, used_min, used_max,
