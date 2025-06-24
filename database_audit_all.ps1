@@ -27,11 +27,11 @@ cd $OracleAuditScripts
 git pull
 
 cd $ResultsPath\database1_host1
-Write-Output "$(Get-Date -format ""yyyy-MM-dd HH:mm:ss"") - $pwd.Path"
+Write-Output "$(Get-Date -format ""yyyy-MM-dd HH:mm:ss"") - $pwd"
 Start-Process -FilePath $SQLPath -ArgumentList "-name ""sqlcl saved connection name"" @$AuditScript" -Wait #-NoNewWindow
 
 cd $ResultsPath\database2_host2
-Write-Output "$(Get-Date -format ""yyyy-MM-dd HH:mm:ss"") - $pwd.Path"
+Write-Output "$(Get-Date -format ""yyyy-MM-dd HH:mm:ss"") - $pwd"
 Start-Process -FilePath $SQLPath -ArgumentList "user2/password2@database2_host:1521/SID2 @$AuditScript#" -Wait #-NoNewWindow
 
 cd $ResultsPath
