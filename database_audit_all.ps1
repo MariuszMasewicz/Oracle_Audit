@@ -10,14 +10,19 @@ $SQLPath="c:\Program Files\sqlcl\bin\sql.exe"
 #local git repository or cloned copy of remote git repository
 #for example
 #git clone https://your remote repository/Databases_config
-$ResultsPath="PATH_TO_RESULTS\results"
+#$ResultsPath="PATH_TO_RESULTS\results"
+$ResultsPath="$CurrentDir\results"
+
 
 #name of main script running all audit queries
 $AuditScript="oracle_conf_audit.sql"
 
 #location where Oracle_Adit is cloned
 #git clone https://github.com/MariuszMasewicz/Oracle_Audit
-$OracleAuditScripts="path_to_local_Oracle_Audit_repository"
+#or
+#git submodule add https://github.com/MariuszMasewicz/Oracle_Audit Oracle_Audit
+#$OracleAuditScripts="path_to_local_Oracle_Audit_repository"
+$OracleAuditScripts="$CurrentDir\Oracle_Audit"
 
 
 Get-Date -format "yyyy-MM-dd HH:mm:ss"
