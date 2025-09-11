@@ -23,6 +23,7 @@ spool off
 @scheduler.sql
 @asm.sql
 @db_links.sql
+@objects.sql
 @users_permissions.sql
 @performance.sql
 @memory.sql
