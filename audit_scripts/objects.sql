@@ -1,4 +1,15 @@
+SET SQLFORMAT CSV
+
+spool audit_results/invalid_objects.csv
+select * 
+from cdb_objects 
+where status <> 'VALID' 
+order by owner, object_type, object_name;
+spool off
+
+
 --select * from cdb_tables order by owner, table_name, tablespace_name;
+/*
 select owner, table_name, tablespace_name from cdb_tables order by owner, table_name, tablespace_name;
 
 desc cdb_indexes
@@ -62,3 +73,4 @@ select owner,
     from cdb_indexes;
 
 select listagg(column_name, ',') within group( order by column_position) from cdb_ind_columns where INDEX_OWNER = 'SYS' and 	INDEX_NAME='XS$OBJ_UK' and	TABLE_OWNER = 'SYS' and 	TABLE_NAME = 'XS$OBJ';
+*/
