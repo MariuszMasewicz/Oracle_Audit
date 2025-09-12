@@ -1,4 +1,6 @@
 SET SQLFORMAT CSV
+prompt user_permissions.sq
+
 
 spool audit_results/cdb_users.csv
 select * from cdb_users order by con_id, username;

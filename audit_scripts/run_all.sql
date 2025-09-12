@@ -10,6 +10,9 @@ set timing off
 set feedback off
 set termout off
 SET SQLFORMAT CSV
+
+prompt STARTING
+
 spool audit_results/run_all.txt
 select to_char(sysdate,'YYYY-MM-DD hh24:mi:ss') from dual;
 spool off

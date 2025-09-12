@@ -1,4 +1,6 @@
 SET SQLFORMAT CSV
+prompt storage.sql
+
 spool audit_results/cdb_data_files.csv
 select * from cdb_data_files order by con_id, file_id desc;
 spool off

@@ -1,4 +1,6 @@
 SET SQLFORMAT CSV
+prompt basic_config.sql
+
 spool audit_results/v_database.csv
 select * from gv$database;
 spool off

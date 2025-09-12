@@ -1,4 +1,6 @@
 SET SQLFORMAT CSV
+prompt scheduler.sql
+
 
 spool audit_results/cdb_scheduler_jobs.csv
 select * from cdb_scheduler_jobs order by con_id, owner, job_name;

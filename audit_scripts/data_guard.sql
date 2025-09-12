@@ -1,4 +1,6 @@
 SET SQLFORMAT CSV
+prompt data_guard.sql
+
 spool audit_results/v_dataguard_stats.csv
 select * from gv$dataguard_stats order by inst_id, name;
 spool off

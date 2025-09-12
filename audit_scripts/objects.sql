@@ -1,5 +1,7 @@
 SET SQLFORMAT CSV
+prompt objects.sql
 
+prompt audit_results/invalid_objects.csv
 spool audit_results/invalid_objects.csv
 select * 
 from cdb_objects 

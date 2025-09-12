@@ -1,4 +1,6 @@
 SET SQLFORMAT CSV
+prompt cdb.sql
+
 spool audit_results/v_containers.csv
 select * 
 from GV$CONTAINERS
