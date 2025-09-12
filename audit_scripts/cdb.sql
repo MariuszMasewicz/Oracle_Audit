@@ -5,16 +5,16 @@ prompt cdb.sql
 set termout off
 
 set termout on
-prompt --
+prompt --audit_results/gv_containers.csv
 set termout off
-spool audit_results/v_containers.csv
+spool audit_results/gv_containers.csv
 select * 
 from GV$CONTAINERS
 order by 1,2;
 spool off
 
 set termout on
-prompt --
+prompt --audit_results/cdb_pdbs.csv
 set termout off
 spool audit_results/cdb_pdbs.csv
 select * 
@@ -23,7 +23,7 @@ order by 1,2;
 spool off
 
 set termout on
-prompt --
+prompt --audit_results/cdb_properties.csv
 set termout off
 spool audit_results/cdb_properties.csv
 select * 
