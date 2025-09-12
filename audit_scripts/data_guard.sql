@@ -1,5 +1,9 @@
 SET SQLFORMAT CSV
+
+set termout on
 prompt data_guard.sql
+set termout off
+
 
 spool audit_results/v_dataguard_stats.csv
 select * from gv$dataguard_stats order by inst_id, name;

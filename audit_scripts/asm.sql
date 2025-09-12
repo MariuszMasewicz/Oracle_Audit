@@ -1,5 +1,8 @@
 SET SQLFORMAT CSV
+
+set termout on
 prompt asm.sql
+set termout off
 
 spool audit_results/v_asm_diskgroup.csv
 select * from gv$ASM_diskgroup order by name;

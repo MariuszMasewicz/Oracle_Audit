@@ -1,5 +1,8 @@
 SET SQLFORMAT CSV
+
+set termout on
 prompt storage.sql
+set termout off
 
 spool audit_results/cdb_data_files.csv
 select * from cdb_data_files order by con_id, file_id desc;

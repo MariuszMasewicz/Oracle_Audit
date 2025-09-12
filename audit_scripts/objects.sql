@@ -1,7 +1,12 @@
 SET SQLFORMAT CSV
-prompt objects.sql
 
+set termout on
+prompt objects.sql
+set termout off
+
+set termout on
 prompt audit_results/invalid_objects.csv
+set termout off
 spool audit_results/invalid_objects.csv
 select * 
 from cdb_objects 

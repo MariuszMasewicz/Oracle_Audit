@@ -1,5 +1,9 @@
 SET SQLFORMAT CSV
+
+set termout on
 prompt basic_config.sql
+set termout off
+
 
 spool audit_results/v_database.csv
 select * from gv$database;

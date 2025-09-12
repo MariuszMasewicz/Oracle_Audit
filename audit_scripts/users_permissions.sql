@@ -1,5 +1,8 @@
 SET SQLFORMAT CSV
-prompt user_permissions.sq
+
+set termout on
+prompt user_permissions.sql
+set termout off
 
 
 spool audit_results/cdb_users.csv

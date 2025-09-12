@@ -1,5 +1,8 @@
 SET SQLFORMAT CSV
+
+set termout on
 prompt scheduler.sql
+set termout off
 
 
 spool audit_results/cdb_scheduler_jobs.csv

@@ -1,5 +1,8 @@
 SET SQLFORMAT CSV
+
+set termout on
 prompt performance.sql
+set termout off
 
 spool audit_results/gv_db_cache_advice.csv
 select * from gv$db_cache_advice order by inst_id, id, size_for_estimate;

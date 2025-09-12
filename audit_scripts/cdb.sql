@@ -1,5 +1,9 @@
 SET SQLFORMAT CSV
+
+set termout on
 prompt cdb.sql
+set termout off
+
 
 spool audit_results/v_containers.csv
 select * 
