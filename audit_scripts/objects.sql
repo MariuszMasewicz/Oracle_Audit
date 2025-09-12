@@ -5,7 +5,7 @@ prompt objects.sql
 set termout off
 
 set termout on
-prompt audit_results/invalid_objects.csv
+prompt --audit_results/invalid_objects.csv
 set termout off
 spool audit_results/invalid_objects.csv
 select * 
