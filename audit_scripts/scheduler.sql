@@ -4,15 +4,21 @@ set termout on
 prompt scheduler.sql
 set termout off
 
-
+set termout on
+prompt --audit_results/cdb_scheduler_jobs.csv
+set termout off
 spool audit_results/cdb_scheduler_jobs.csv
 select * from cdb_scheduler_jobs order by con_id, owner, job_name;
 spool off
 
+/*
+set termout on
+prompt --
+set termout off
 spool audit_results/scheduler_YOUR_ADMIN_PREFIX_jobs_run_log.csv
 select * from cdb_scheduler_job_run_details where job_name like 'YOUR_ADMIN_PREFIX%' and output is not null order by con_id, log_id desc;
 spool off
-
+*/
 
 
 

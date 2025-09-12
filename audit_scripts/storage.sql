@@ -4,36 +4,60 @@ set termout on
 prompt storage.sql
 set termout off
 
+set termout on
+prompt --audit_results/cdb_data_files.csv
+set termout off
 spool audit_results/cdb_data_files.csv
 select * from cdb_data_files order by con_id, file_id desc;
 spool off
 
-spool audit_results/v_datafile.csv
+set termout on
+prompt --audit_results/gv_datafile.csv
+set termout off
+spool audit_results/gv_datafile.csv
 select * from gv$datafile order by file# desc;
 spool off
 
+set termout on
+prompt --audit_results/cdb_temp_files.csv
+set termout off
 spool audit_results/cdb_temp_files.csv
 select * from cdb_temp_files order by con_id, file_id desc;
 spool off
 
-spool audit_results/v_controlfile.csv
+set termout on
+prompt --audit_results/cdb_temp_files.csv
+set termout off
+spool audit_results/gv_controlfile.csv
 select * from gV$CONTROLFILE order by name;
 spool off
 
+set termout on
+prompt --audit_results/cdb_tablespaces.csv
+set termout off
 spool audit_results/cdb_tablespaces.csv
 select * from cdb_tablespaces order by con_id, tablespace_name;
 spool off
 
-spool audit_results/v_tablespace.csv
+set termout on
+prompt --audit_results/gv_tablespace.csv
+set termout off
+spool audit_results/gv_tablespace.csv
 select * from gv$tablespace order by name;
 spool off
 
+set termout on
+prompt --audit_results/top_segments_by_bytes.csv
+set termout off
 spool audit_results/top_segments_by_bytes.csv
 select * 
 from (select * from cdb_segments order by bytes desc)
 where rownum <=100;
 spool off
 
+set termout on
+prompt --audit_results/tablespaces_free_space.csv
+set termout off
 spool audit_results/tablespaces_free_space.csv
 SELECT
 --  to_char(sysdate, 'YYYY-MM-DD_HH24:MI:SS') as metric_time,
@@ -83,6 +107,9 @@ left outer join (
   order by a.con_id, a.tablespace_name;
 spool off
 
+set termout on
+prompt --audit_results/storage_size.csv
+set termout off
 spool audit_results/storage_size.csv
 SELECT typ, con_id, Tablespace_LogGroup, SUM(gb) GB, sum(files) as files FROM
 (
@@ -102,6 +129,9 @@ GROUP BY ROLLUP(typ, con_id, Tablespace_LogGroup)
 order by typ, con_id, Tablespace_LogGroup, GB desc;
 spool off
 
+set termout on
+prompt --audit_results/storage_FreeUsedSpace.csv
+set termout off
 spool audit_results/storage_FreeUsedSpace.csv
 select tbsp.con_id, tbsp.tablespace_name, block_size, 
  files_bytes, files_count, files_min, files_max,
