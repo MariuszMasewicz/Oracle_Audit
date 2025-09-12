@@ -4,7 +4,7 @@ spool audit_results/invalid_objects.csv
 select * 
 from cdb_objects 
 where status <> 'VALID' 
-order by owner, object_type, object_name;
+order by con_id, owner, object_type, object_name;
 spool off
 
 
