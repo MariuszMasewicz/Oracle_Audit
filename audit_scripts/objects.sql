@@ -14,6 +14,14 @@ where status <> 'VALID'
 order by con_id, owner, object_type, object_name;
 spool off
 
+set termout on
+prompt --audit_results/invalid_indexes.csv
+set termout off
+spool audit_results/invalid_indexes.csv
+select * from cdb_indexes 
+where status not in ('VALID','N/A')
+order by con_id, owner, index_name;
+
 
 --select * from cdb_tables order by owner, table_name, tablespace_name;
 /*
