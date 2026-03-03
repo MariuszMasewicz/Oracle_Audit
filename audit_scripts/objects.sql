@@ -14,6 +14,40 @@ where status <> 'VALID'
 order by con_id, owner, object_type, object_name;
 spool off
 
+set termout on
+prompt --audit_results/cdb_triggers.csv
+set termout off
+spool audit_results/cdb_triggers.csv
+select * from cdb_triggers order by con_id, owner, trigger_name;
+spool off
+
+set termout on
+prompt --audit_results/cdb_views.csv
+set termout off
+spool audit_results/cdb_views.csv
+select * from cdb_views  order by con_id, owner, view_name;
+spool off
+
+set termout on
+prompt --audit_results/cdb_tables.csv
+set termout off
+spool audit_results/cdb_tables.csv
+select * from cdb_tables  order by con_id, owner, table_name;
+spool off
+
+set termout on
+prompt --audit_results/cdb_indexes.csv
+set termout off
+spool audit_results/cdb_indexes.csv
+select OWNER,INDEX_NAME,INDEX_TYPE,TABLE_OWNER,TABLE_NAME,TABLE_TYPE,UNIQUENESS,COMPRESSION,PREFIX_LENGTH,TABLESPACE_NAME,
+INI_TRANS,MAX_TRANS,INITIAL_EXTENT,NEXT_EXTENT,MIN_EXTENTS,MAX_EXTENTS,PCT_INCREASE,PCT_THRESHOLD,INCLUDE_COLUMN,FREELISTS,FREELIST_GROUPS,
+PCT_FREE,LOGGING,STATUS,DEGREE,INSTANCES,PARTITIONED,TEMPORARY,GENERATED,SECONDARY,BUFFER_POOL,FLASH_CACHE,CELL_FLASH_CACHE,USER_STATS,DURATION,
+PCT_DIRECT_ACCESS,ITYP_OWNER,ITYP_NAME,PARAMETERS,GLOBAL_STATS,DOMIDX_STATUS,DOMIDX_OPSTATUS,FUNCIDX_STATUS,JOIN_INDEX,IOT_REDUNDANT_PKEY_ELIM,
+DROPPED,VISIBILITY,DOMIDX_MANAGEMENT,SEGMENT_CREATED,ORPHANED_ENTRIES,INDEXING,AUTO,CONSTRAINT_INDEX,CON_ID
+from cdb_indexes  
+order by con_id, owner, index_name;
+spool off
+
 
 --select * from cdb_tables order by owner, table_name, tablespace_name;
 /*
