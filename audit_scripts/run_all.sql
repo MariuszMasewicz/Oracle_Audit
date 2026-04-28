@@ -32,3 +32,4 @@ spool off
 @performance.sql
 @memory.sql
 @data_guard.sql
+@supplemental_logging.sql
